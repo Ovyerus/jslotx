@@ -1,0 +1,25 @@
+{
+  "name": "jslotx",
+  "version": "0.0.1",
+  "description": "Control where your JSX children go using slots.",
+  "main": "dist/jslotx.js",
+  "umd:main": "dist/jslotx.umd.js",
+  "module": "dist/jslox.mjs",
+  "source": "jslotx.js",
+  "repository": "git@github.com:Ovyerus/jslotx.git",
+  "author": "Ovyerus <iamovyerus@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+	"lint": "eslint jslotx.js",
+	"build": "microbundle build"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.13",
+    "chai": "^4.2.0",
+    "eslint": "^5.9.0",
+    "microbundle": "^0.8.3",
+    "mocha": "^5.2.0",
+    "preact": "^8.4.1",
+    "react": "^16.6.3"
+  }
+}
