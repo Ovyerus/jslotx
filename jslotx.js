@@ -111,7 +111,17 @@ export function transformPreact(component) {
     };
 }
 
+export function transformHyperapp(component) {
+    return function(props, children) {
+        const slots = transformChildren(children, 'hyperscript');
+
+
+        return component({
+            ...props,
+            slots
+        }, children);
+    };
+}
+
 /** An alias for transformSFC(component, true) */
 export const transformPreactSFC = component => transformSFC(component, true);
-/** An alias for transformSFC(component, true) */
-export const transformHyperscript = transformPreactSFC;
