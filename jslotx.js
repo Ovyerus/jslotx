@@ -60,7 +60,7 @@ export function transformChildren(children, type) {
 }
 
 /**
- * Transforms a React (or Preact) Stateless Functional Component (SFC) to use slots.
+ * Transforms a React (or Preact) Stateless Functional Component (SFC) to receive slots.
  * 
  * @param {*} component 
  */
@@ -76,7 +76,7 @@ export function transformSFC(component, isHyperscript) {
 }
 
 /**
- * Transforms a React class component to use slots.
+ * Transforms a React class component to receive slots.
  * 
  * @param {*} component 
  */
@@ -94,7 +94,7 @@ export function transformReact(component) {
 }
 
 /**
- * Transforms a Preact class component to use slots.
+ * Transforms a Preact class component to receive slots.
  * 
  * @param {*} component 
  */
@@ -111,6 +111,11 @@ export function transformPreact(component) {
     };
 }
 
+/**
+ * Transforms a Hyperapp component to receive slots.
+ * 
+ * @param {*} component 
+ */
 export function transformHyperapp(component) {
     return function(props, children) {
         const slots = transformChildren(children, 'hyperscript');
@@ -125,3 +130,36 @@ export function transformHyperapp(component) {
 
 /** An alias for transformSFC(component, true) */
 export const transformPreactSFC = component => transformSFC(component, true);
+
+
+/**
+ * Transforms React's `createElement` function, and returns one that automatically calculates slots.
+ * 
+ * @param {Function} pragma React createElement function.
+ */
+export function transformReactCreateElement(pragma) {
+    return function createElement(name, props, ...children) {
+        const slots = transformChildren(children, 'react');
+
+        return pragma(name, {
+            ...props,
+            slots
+        }, ...children);
+    };
+}
+
+/**
+ * Transforms the `h` or `createElement` function of any lib which follows the Hyperscript object structure.
+ * 
+ * @param {Function} pragma createElement or h function.
+ */
+export function transformH(pragma) {
+    return function h(name, props, ...children) {
+        const slots = transformChildren(children, 'hyperscript');
+
+        return pragma(name, {
+            ...props,
+            slots
+        }, ...children);
+    };
+}
