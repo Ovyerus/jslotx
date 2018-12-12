@@ -1,6 +1,6 @@
 {
   "name": "jslotx",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Control where your JSX children go using slots.",
   "main": "dist/jslotx.js",
   "umd:main": "dist/jslotx.umd.js",
