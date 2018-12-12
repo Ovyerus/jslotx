@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "lint": "eslint jslotx.js",
-    "build": "microbundle build"
+    "build": "microbundle build",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/react": "^16.7.13",
